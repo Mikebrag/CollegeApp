@@ -1,7 +1,11 @@
 package cse5236.collegeapp;
 
+import android.accounts.Account;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentActivity;
+import android.support.v4.app.FragmentManager;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
@@ -31,23 +35,36 @@ public class MainActivity extends AppCompatActivity {
                 new NavigationView.OnNavigationItemSelectedListener() {
                     @Override
                     public boolean onNavigationItemSelected(MenuItem menuItem) {
-                        // set item as selected to persist highlight
-                        //menuItem.setChecked(true);
+                        Fragment fragment = null;
+                        Class fragmentClass = null;
                         // close drawer when item is tapped
                         drawerLayout.closeDrawers();
                         int id = menuItem.getItemId();
                         switch (id) {
                             case R.id.nav_portfolio:
-                                Toast.makeText(MainActivity.this, R.string.title_activity_portfolio, Toast.LENGTH_SHORT).show();
+                                fragmentClass = PortfolioFragment.class;
+                                break;
                             case R.id.nav_maps:
                                 Toast.makeText(MainActivity.this, R.string.title_activity_maps, Toast.LENGTH_SHORT).show();
+                                break;
                             case R.id.nav_account:
-                                Toast.makeText(MainActivity.this, R.string.title_activity_account, Toast.LENGTH_SHORT).show();
+                                fragmentClass = AccountFragment.class;
+                                break;
                         }
 
                         // Add code here to update the UI based on the item selected
                         // For example, swap UI fragments here
 
+                        try {
+                            fragment = (Fragment) fragmentClass.newInstance();
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
+                        FragmentManager fragmentManager = getSupportFragmentManager();
+                        fragmentManager.beginTransaction().replace(R.id.fragContent, fragment).commit();
+
+                        //DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+                        //drawer.closeDrawer(GravityCompat.START);
                         return true;
                     }
                 });
