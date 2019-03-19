@@ -3,6 +3,7 @@ package cse5236.collegeapp;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.net.Uri;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -12,6 +13,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -21,8 +23,12 @@ import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 
+
+
 public class AccountFragment extends Fragment implements View.OnClickListener {
     private static final String TAG = "AccountFragment";
+
+    public static Uri profilePicture = null;
 
     @Override
     public void onAttach(Context context) {
@@ -56,7 +62,6 @@ public class AccountFragment extends Fragment implements View.OnClickListener {
         Log.d(TAG, "Entering onStart");
         super.onStart();
         SharedPreferences sharedPref = getActivity().getPreferences(Context.MODE_PRIVATE);
-
         String defaultGivenName = getResources().getString(R.string.default_user_given_name_key);
         String givenName = sharedPref.getString(getString(R.string.user_given_name_key), defaultGivenName);
         String defaultFamilyName = getResources().getString(R.string.default_user_family_name_key);
@@ -64,6 +69,12 @@ public class AccountFragment extends Fragment implements View.OnClickListener {
         TextView displayNameView = getView().findViewById(R.id.user_full_name);
         displayNameView.setText(givenName + " " + familyName);
 
+        ImageView profilePictureView = getView().findViewById(R.id.user_profile_picture);
+        if (profilePicture != null) {
+            profilePictureView.setImageURI(profilePicture);
+        } else {
+            profilePictureView.setImageResource(R.drawable.ic_account_circle_black_24dp);
+        }
         String defaultEmail = getResources().getString(R.string.default_user_email_key);
         String email = sharedPref.getString(getString(R.string.user_email_key), defaultEmail);
         TextView emailView = getView().findViewById(R.id.user_email);

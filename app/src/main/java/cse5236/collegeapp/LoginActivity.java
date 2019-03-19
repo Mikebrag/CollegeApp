@@ -16,6 +16,8 @@ import com.google.android.gms.common.SignInButton;
 import com.google.android.gms.common.api.ApiException;
 import com.google.android.gms.tasks.Task;
 
+import java.util.Map;
+
 import androidx.appcompat.app.AppCompatActivity;
 
 public class LoginActivity extends AppCompatActivity implements View.OnClickListener {
@@ -100,6 +102,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             editor.putString(getString(R.string.user_family_name_key), mGoogleSignInAccount.getFamilyName());
             editor.putString(getString(R.string.user_email_key), mGoogleSignInAccount.getEmail());
             editor.commit();
+            //AccountFragment.profilePicture = mGoogleSignInAccount.getPhotoUrl();
             Intent i = new Intent(LoginActivity.this, MainActivity.class);
             startActivity(i);
         }

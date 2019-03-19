@@ -26,4 +26,5 @@
     <string name="default_user_email_key">Default Email</string>
     <string name="sign_out_button">Log Out</string>
     <string name="delete_account_button">Delete Account</string>
+    <string name="user_profile_picture">user_profile_picture</string>
 </resources>
