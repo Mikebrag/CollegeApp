@@ -27,4 +27,6 @@
     <string name="sign_out_button">Log Out</string>
     <string name="delete_account_button">Delete Account</string>
     <string name="user_profile_picture">user_profile_picture</string>
+
+    <string name="server_client_id">561304898009-neqhgfukgtvq2ivqklvmo7k323tbab9v.apps.googleusercontent.com</string>
 </resources>

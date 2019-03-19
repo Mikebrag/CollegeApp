@@ -2,6 +2,12 @@ apply plugin: 'com.android.application'
 
 android {
     signingConfigs {
+        config {
+            keyAlias 'upload'
+            keyPassword 'Mayfield6key'
+            storeFile file('C:/Users/Maxwe/keystores/upload-keystore.jks')
+            storePassword 'Mayfield6'
+        }
     }
     compileSdkVersion 28
     defaultConfig {
@@ -16,6 +22,7 @@ android {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.config
         }
         debug {
         }
