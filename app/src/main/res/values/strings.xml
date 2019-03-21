@@ -29,4 +29,8 @@
     <string name="user_profile_picture">user_profile_picture</string>
 
     <string name="server_client_id">561304898009-neqhgfukgtvq2ivqklvmo7k323tbab9v.apps.googleusercontent.com</string>
+    <string name="add_button">Add Record</string>
+    <string name="delete_button">Delete Record</string>
+    <string name="show_button">Show Records</string>
+    <string name="update_button">Update Records</string>
 </resources>
