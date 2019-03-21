@@ -8,6 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -17,6 +18,10 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 public class PortfolioFragment extends Fragment {
     private static final String TAG = "PortfolioFragment";
@@ -52,25 +57,39 @@ public class PortfolioFragment extends Fragment {
         mAddButton = (Button) v.findViewById(R.id.add_button);
         mDeleteButton = (Button) v.findViewById(R.id.delete_button);
         mShowButton = (Button) v.findViewById(R.id.show_button);
-        mUpdateButton = (Button) v.findViewById(R.id.update_button);
+        //mUpdateButton = (Button) v.findViewById(R.id.update_button);
         final TextView textView = (TextView) v.findViewById(R.id.simpleTextView);
+        final EditText mSubject = (EditText) v.findViewById(R.id.edittext_subject);
+        final EditText mDate = (EditText) v.findViewById(R.id.edittext_date);
+        final EditText mId = (EditText) v.findViewById(R.id.edittext_id);
+        final EditText mBody = (EditText) v.findViewById(R.id.edittext_body);
+        final EditText mDelete = (EditText) v.findViewById(R.id.edittext_delete);
 
         mAddButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
                 FirebaseDatabase database = FirebaseDatabase.getInstance();
-                DatabaseReference myRef = database.getReference("message");
-                myRef.setValue("Note 1");
+                DatabaseReference myRef = database.getReference();
+
+                String subj = mSubject.getText().toString();
+                String d = mDate.getText().toString();
+                String nID = mId.getText().toString();
+                String b = mBody.getText().toString();
+
+                Note note1 = new Note(b, d, nID, subj);
+                //myRef.setValue("Note 1");
+                myRef.child("note").child(nID).setValue(note1);
             }
         });
         mDeleteButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 FirebaseDatabase database = FirebaseDatabase.getInstance();
-                DatabaseReference myRef = database.getReference("message");
-                myRef.removeValue();
-                textView.setText("");
+                DatabaseReference myRef = database.getReference();
+                String nID = mDelete.getText().toString();
+                myRef.child("note").child(nID).removeValue();
+                //textView.setText("");
             }
         });
 
@@ -78,14 +97,21 @@ public class PortfolioFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 FirebaseDatabase database = FirebaseDatabase.getInstance();
-                DatabaseReference myRef = database.getReference("message");
+                DatabaseReference myRef = database.getReference("note");
                 myRef.addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
                     public void onDataChange(DataSnapshot dataSnapshot) {
                         if (dataSnapshot.exists()) {
-                            String value = dataSnapshot.getValue(String.class);
+                            //String value = dataSnapshot.getValue(String.class);
+                            ArrayList<Object> newPost = (ArrayList<Object>) dataSnapshot.getValue();
+                            HashMap<String, String> note = (HashMap<String, String>) newPost.get(1);
+                            String subjectString = note.get("Subject");
+                            String dateString = note.get("Date");
+                            String noteIDString = note.get("NoteID");
+                            String bodyString = note.get("Body");
+                            String value = "Subject: "+subjectString + " Date: "+dateString +  "NoteID: "+noteIDString + " Body: "+bodyString;
                             textView.setText(value);
-                            Log.d("showButton", "Value is: " + value);
+                            //Log.d("showButton", "Value is: " + value);
                         }
                     }
 
@@ -98,15 +124,15 @@ public class PortfolioFragment extends Fragment {
             }
         });
 
-        mUpdateButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                FirebaseDatabase database = FirebaseDatabase.getInstance();
-                DatabaseReference myRef = database.getReference("message");
-                myRef.setValue("Note 2");
-            }
-        });
+//        mUpdateButton.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//
+//                FirebaseDatabase database = FirebaseDatabase.getInstance();
+//                DatabaseReference myRef = database.getReference("message");
+//                myRef.setValue("Note 2");
+//            }
+//        });
 
         return v;
     }

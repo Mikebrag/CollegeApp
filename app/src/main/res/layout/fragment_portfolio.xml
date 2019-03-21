@@ -6,15 +6,37 @@
 
     <Button
         android:id="@+id/my_button"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Portfolio Fragment" />
 
-    <Button
-        android:id="@+id/delete_button"
-        android:layout_width="wrap_content"
+    <EditText
+        android:id="@+id/edittext_subject"
+        android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:text="@string/delete_button" />
+        android:ems="10"
+        android:hint="Enter Note Subject" android:inputType="text" />
+
+    <EditText
+        android:id="@+id/edittext_date"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:hint="Enter Note Date" android:inputType="text" />
+
+    <EditText
+        android:id="@+id/edittext_id"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:hint="Enter NoteID" android:inputType="text" />
+
+    <EditText
+        android:id="@+id/edittext_body"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:hint="Enter Note Body" android:inputType="text" />
 
     <Button
         android:id="@+id/add_button"
@@ -22,23 +44,39 @@
         android:layout_height="wrap_content"
         android:text="@string/add_button" />
 
-    <Button
-        android:id="@+id/show_button"
-        android:layout_width="wrap_content"
+    <EditText
+        android:id="@+id/edittext_delete"
+        android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:text="@string/show_button" />
+        android:ems="10"
+        android:hint="Enter NoteID To Delete" android:inputType="text" />
 
     <Button
-        android:id="@+id/update_button"
+        android:id="@+id/delete_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/update_button" />
+        android:text="@string/delete_button" />
+    <!--
+       <Button
+           android:id="@+id/update_button"
+           android:layout_width="wrap_content"
+           android:layout_height="wrap_content"
+           android:text="@string/update_button" />
+    -->
+       <Button
+           android:id="@+id/show_button"
+           android:layout_width="wrap_content"
+           android:layout_height="wrap_content"
+           android:text="@string/show_button" />
 
-    <TextView
-        android:id="@+id/simpleTextView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:baselineAligned="false"
-        android:text="Click Update Records to show record"/>
+       <TextView
+           android:id="@+id/simpleTextView"
+           android:layout_width="wrap_content"
+           android:layout_height="wrap_content"
+           android:baselineAligned="false"
+           android:text="Click Show Message to retrieve" />
 
-</LinearLayout>
+   </LinearLayout>
+
+
+
