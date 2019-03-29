@@ -1,24 +1,26 @@
 package cse5236.collegeapp;
 
-public class Rating {
+public class University {
 
-    public String Rating;
-    public String Date;
-    public String RatingID;
+    public String City;
+    public String Name;
+    public String Size;
     public String UniversityID;
-    public String UserID;
+    public String State;
+    public String Zip;
 
 
-    public Rating(){
+    public University(){
 
     }
 
-    public Rating(String r, String d, String r1, String u1, String u2){
-        Rating = r;
-        Date = d;
-        RatingID = r1;
-        UniversityID = u1;
-        UserID = u2;
+    public University(String n, String c, String s, String z, String s1, String u){
+        Name = n;
+        City = c;
+        Size = s1;
+        UniversityID = u;
+        State = s;
+        Zip = z;
     }
 
     public String toString(){
@@ -26,3 +28,4 @@ public class Rating {
     }
 
 }
+
