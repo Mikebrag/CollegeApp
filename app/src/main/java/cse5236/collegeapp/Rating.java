@@ -1,22 +1,22 @@
 package cse5236.collegeapp;
 
-public class Application {
+public class Rating {
 
-    public String ApplicationID;
+    public String Rating;
     public String Date;
-    public String Status;
+    public String RatingID;
     public String UniversityID;
     public String UserID;
 
 
-    public Application(){
+    public Rating(){
 
     }
 
-    public Application(String a, String d, String s, String u1, String u2){
-        ApplicationID = a;
+    public Rating(String r, String d, String r1, String u1, String u2){
+        Rating = r;
         Date = d;
-        Status = s;
+        RatingID = r1;
         UniversityID = u1;
         UserID = u2;
     }

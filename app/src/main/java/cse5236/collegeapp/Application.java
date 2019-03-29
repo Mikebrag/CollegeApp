@@ -1,25 +1,28 @@
 package cse5236.collegeapp;
 
-public class Note {
+public class Application {
 
-    public String Body;
+    public String ApplicationID;
     public String Date;
-    public String NoteID;
-    public String Subject;
+    public String Status;
+    public String UniversityID;
+    public String UserID;
 
-    public Note(){
+
+    public Application(){
 
     }
 
-    public Note(String b, String d, String n, String s){
-        Body = b;
+    public Application(String a, String d, String s, String u1, String u2){
+        ApplicationID = a;
         Date = d;
-        NoteID = n;
-        Subject = s;
+        Status = s;
+        UniversityID = u1;
+        UserID = u2;
     }
 
     public String toString(){
-        return "Subject: "+Subject + "Date: "+Date + "NoteID: "+NoteID + "Body: "+Body;
+        return "";
     }
 
 }
