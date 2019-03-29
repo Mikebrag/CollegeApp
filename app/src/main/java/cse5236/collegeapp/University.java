@@ -2,12 +2,12 @@ package cse5236.collegeapp;
 
 public class University {
 
-    public String City;
-    public String Name;
-    public String Size;
-    public String UniversityID;
-    public String State;
-    public String Zip;
+    private String City;
+    private String Name;
+    private String Size;
+    private String UniversityID;
+    private String State;
+    private String Zip;
 
 
     public University(){
@@ -25,6 +25,54 @@ public class University {
 
     public String toString(){
         return "";
+    }
+
+    public String getCity() {
+        return City;
+    }
+
+    public void setCity(String city) {
+        City = city;
+    }
+
+    public String getName() {
+        return Name;
+    }
+
+    public void setName(String name) {
+        Name = name;
+    }
+
+    public String getSize() {
+        return Size;
+    }
+
+    public void setSize(String size) {
+        Size = size;
+    }
+
+    public String getUniversityID() {
+        return UniversityID;
+    }
+
+    public void setUniversityID(String universityID) {
+        UniversityID = universityID;
+    }
+
+    public String getState() {
+        return State;
+    }
+
+    public void setState(String state) {
+        State = state;
+    }
+
+    public String getZip() {
+        return Zip;
+    }
+
+    public void setZip(String zip) {
+        Zip = zip;
     }
 
 }
