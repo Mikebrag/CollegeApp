@@ -1,6 +1,11 @@
 package cse5236.collegeapp;
 
 import androidx.fragment.app.FragmentActivity;
+
+import android.Manifest;
+import android.content.pm.PackageManager;
+import android.location.Location;
+import android.os.Build;
 import android.os.Bundle;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
@@ -38,9 +43,20 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
 
-        // Add a marker in Sydney and move the camera
-        LatLng sydney = new LatLng(-34, 151);
-        mMap.addMarker(new MarkerOptions().position(sydney).title("Marker in Sydney"));
-        mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));
+        // Add a marker in Caldwell and move the camera
+        LatLng caldwell = new LatLng(40.002420, -83.015048);
+        mMap.addMarker(new MarkerOptions().position(caldwell).title("Marker in Caldwell"));
+        mMap.moveCamera(CameraUpdateFactory.newLatLng(caldwell));
+        //Initialize Google Play Services
+
+
+
+        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(caldwell,15));
+        // Zoom in, animating the camera.
+        mMap.animateCamera(CameraUpdateFactory.zoomIn());
+        // Zoom out to zoom level 10, animating with a duration of 2 seconds.
+        mMap.animateCamera(CameraUpdateFactory.zoomTo(15), 2000, null);
+
+
     }
 }
