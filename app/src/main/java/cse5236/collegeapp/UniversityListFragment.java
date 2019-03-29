@@ -72,8 +72,15 @@ public class UniversityListFragment extends Fragment {
                 // Create a new instance of the ViewHolder
                 View view = LayoutInflater.from(parent.getContext())
                         .inflate(R.layout.fragment_university_list_item, parent, false);
+                UniversityListViewHolder universityListViewHolder = new UniversityListViewHolder(view);
 
-                return new UniversityListViewHolder(view);
+                universityListViewHolder.setOnClickListener(new UniversityListViewHolder.ClickListener() {
+                    @Override
+                    public void onItemClick(View view, int position) {
+                        Toast.makeText(getActivity(), "Item clicked at " + position, Toast.LENGTH_SHORT).show();
+                    }
+                });
+                return universityListViewHolder;
             }
 
             @Override
@@ -82,12 +89,10 @@ public class UniversityListFragment extends Fragment {
                 holder.textView.setText(model.getName());
                 Log.d(TAG, model.getName());
             }
-
         };
 
         // specify adapter
         recyclerView.setAdapter(firebaseRecyclerAdapter);
-
         return v;
     }
 
@@ -103,13 +108,5 @@ public class UniversityListFragment extends Fragment {
     public void onStop() {
         super.onStop();
         firebaseRecyclerAdapter.stopListening();
-    }
-
-    public class UniversityListViewHolder extends RecyclerView.ViewHolder {
-        public TextView textView;
-        public UniversityListViewHolder(View itemView) {
-            super(itemView);
-            textView = itemView.findViewById(R.id.university_name_text_view);
-        }
     }
 }
