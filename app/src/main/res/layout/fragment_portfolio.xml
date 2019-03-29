@@ -4,12 +4,6 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <Button
-        android:id="@+id/my_button"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Portfolio Fragment" />
-
     <EditText
         android:id="@+id/edittext_subject"
         android:layout_width="fill_parent"
@@ -71,10 +65,12 @@
 
        <TextView
            android:id="@+id/simpleTextView"
-           android:layout_width="wrap_content"
+           android:layout_width="fill_parent"
            android:layout_height="wrap_content"
            android:baselineAligned="false"
-           android:text="Click Show Message to retrieve" />
+           android:hint="Click Show Message to retrieve" />
+
+
 
    </LinearLayout>
 

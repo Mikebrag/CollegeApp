@@ -104,17 +104,20 @@ public class PortfolioFragment extends Fragment {
                         if (dataSnapshot.exists()) {
                             //String value = dataSnapshot.getValue(String.class);
                             ArrayList<Object> newPost = (ArrayList<Object>) dataSnapshot.getValue();
-                            HashMap<String, String> note = (HashMap<String, String>) newPost.get(1);
-                            String subjectString = note.get("Subject");
-                            String dateString = note.get("Date");
-                            String noteIDString = note.get("NoteID");
-                            String bodyString = note.get("Body");
-                            String value = "Subject: "+subjectString + " Date: "+dateString +  "NoteID: "+noteIDString + " Body: "+bodyString;
-                            textView.setText(value);
+
+                            for(int i=1; i<newPost.size(); i++) {
+
+                                HashMap<String, String> note = (HashMap<String, String>) newPost.get(i);
+                                String subjectString = note.get("Subject");
+                                String dateString = note.get("Date");
+                                String noteIDString = note.get("NoteID");
+                                String bodyString = note.get("Body");
+                                String value = "Subject: " + subjectString + " Date: " + dateString + " NoteID: " + noteIDString + " Body: " + bodyString;
+                                textView.append("\n\n"+value);
+                            }
                             //Log.d("showButton", "Value is: " + value);
                         }
                     }
-
                     @Override
                     public void onCancelled(DatabaseError databaseError) {
 
@@ -123,16 +126,6 @@ public class PortfolioFragment extends Fragment {
 
             }
         });
-
-//        mUpdateButton.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//
-//                FirebaseDatabase database = FirebaseDatabase.getInstance();
-//                DatabaseReference myRef = database.getReference("message");
-//                myRef.setValue("Note 2");
-//            }
-//        });
 
         return v;
     }
