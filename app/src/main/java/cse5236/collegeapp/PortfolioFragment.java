@@ -7,8 +7,10 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -30,7 +32,6 @@ public class PortfolioFragment extends Fragment {
     private Button mDeleteButton;
     private Button mShowButton;
     private Button mUpdateButton;
-
 
 
 
@@ -64,6 +65,38 @@ public class PortfolioFragment extends Fragment {
         final EditText mId = (EditText) v.findViewById(R.id.edittext_id);
         final EditText mBody = (EditText) v.findViewById(R.id.edittext_body);
         final EditText mDelete = (EditText) v.findViewById(R.id.edittext_delete);
+
+        //get the spinner from the xml.
+        Spinner dropdown = v.findViewById(R.id.collegeList);
+        //create a list of items for the spinner.
+        FirebaseDatabase database = FirebaseDatabase.getInstance();
+        DatabaseReference myRef = database.getReference("university");
+        myRef.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                if (dataSnapshot.exists()) {
+                    //String value = dataSnapshot.getValue(String.class);
+                    ArrayList<Object> newPost = (ArrayList<Object>) dataSnapshot.getValue();
+                    for(int i=1; i<newPost.size(); i++) {
+                        HashMap<String, String> university = (HashMap<String, String>) newPost.get(i);
+                        String nameString = university.get("Name");
+                    }
+
+                }
+            }
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+
+        String[] items = {"The Ohio State University", "Ohio University", "University of Cincinnati"};
+
+        //create an adapter to describe how the items are displayed, adapters are used in several places in android.
+        //There are multiple variations of this, but this is the basic variant.
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this.getActivity(), android.R.layout.simple_spinner_dropdown_item, items);
+        //set the spinners adapter to the previously created one.
+        dropdown.setAdapter(adapter);
 
         mAddButton.setOnClickListener(new View.OnClickListener() {
             @Override
