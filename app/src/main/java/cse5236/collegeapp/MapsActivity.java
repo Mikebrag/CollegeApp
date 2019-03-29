@@ -8,6 +8,7 @@ import android.location.Location;
 import android.os.Build;
 import android.os.Bundle;
 
+
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
@@ -44,19 +45,25 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         mMap = googleMap;
 
         // Add a marker in Caldwell and move the camera
-        LatLng caldwell = new LatLng(40.002420, -83.015048);
-        mMap.addMarker(new MarkerOptions().position(caldwell).title("Marker in Caldwell"));
-        mMap.moveCamera(CameraUpdateFactory.newLatLng(caldwell));
-        //Initialize Google Play Services
+        LatLng osu = new LatLng(40.002420, -83.015048);
+        mMap.addMarker(new MarkerOptions().position(osu).title("Marker at Ohio State"));
 
+        LatLng ou = new LatLng(39.324358,-82.1013889);
+        mMap.addMarker(new MarkerOptions().position(ou).title("Marker at Ohio University"));
 
+        LatLng uc = new LatLng(39.1323031,-84.5147877);
+        mMap.addMarker(new MarkerOptions().position(uc).title("Marker at University of Cincinnati"));
 
-        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(caldwell,15));
+        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(osu,15));
         // Zoom in, animating the camera.
-        mMap.animateCamera(CameraUpdateFactory.zoomIn());
-        // Zoom out to zoom level 10, animating with a duration of 2 seconds.
         mMap.animateCamera(CameraUpdateFactory.zoomTo(15), 2000, null);
 
 
+
+        mMap.setMyLocationEnabled(true);
+
+
     }
+
+
 }
