@@ -15,6 +15,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -76,8 +77,17 @@ public class UniversityListFragment extends Fragment {
 
                 universityListViewHolder.setOnClickListener(new UniversityListViewHolder.ClickListener() {
                     @Override
-                    public void onItemClick(View view, int position) {
-                        Toast.makeText(getActivity(), "Item clicked at " + position, Toast.LENGTH_SHORT).show();
+                    public void onItemClick(View view, String universityId) {
+                        Bundle bundle = new Bundle();
+                        bundle.putString("universityId", universityId);
+                        // set UniversityFragment args
+                        UniversityFragment universityFragment = new UniversityFragment();
+                        universityFragment.setArguments(bundle);
+
+                        FragmentManager fragmentManager = getFragmentManager();
+                        fragmentManager.beginTransaction().replace(R.id.fragContent, universityFragment, "universityList")
+                                .addToBackStack("universityList").commit();
+                        //Toast.makeText(getActivity(), "Item clicked " + universityId, Toast.LENGTH_SHORT).show();
                     }
                 });
                 return universityListViewHolder;
@@ -87,6 +97,7 @@ public class UniversityListFragment extends Fragment {
             protected void onBindViewHolder(UniversityListViewHolder holder, int position, University model) {
                 // Bind the University object to the UniversityListViewHolder
                 holder.textView.setText(model.getName());
+                holder.universityId = model.getUniversityID();
                 Log.d(TAG, model.getName());
             }
         };

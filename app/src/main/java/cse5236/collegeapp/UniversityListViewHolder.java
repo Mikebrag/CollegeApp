@@ -6,8 +6,10 @@ import android.view.View;
 import android.widget.TextView;
 
 public class UniversityListViewHolder extends RecyclerView.ViewHolder {
+
     private UniversityListViewHolder.ClickListener mClickListener;
     public TextView textView;
+    public String universityId;
 
     public UniversityListViewHolder(View itemView) {
         super(itemView);
@@ -16,7 +18,7 @@ public class UniversityListViewHolder extends RecyclerView.ViewHolder {
             @Override
             public void onClick(View v) {
                 if (mClickListener != null) {
-                    mClickListener.onItemClick(v, getAdapterPosition());
+                    mClickListener.onItemClick(v, universityId);
                 }
             }
 
@@ -25,7 +27,7 @@ public class UniversityListViewHolder extends RecyclerView.ViewHolder {
 
     // Interface to send callbacks
     public interface ClickListener {
-        void onItemClick(View view, int position);
+        void onItemClick(View view, String universityId);
     }
 
     public void setOnClickListener(UniversityListViewHolder.ClickListener clickListener){

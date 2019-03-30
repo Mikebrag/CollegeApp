@@ -27,10 +27,15 @@ public class MainActivity extends AppCompatActivity {
 
     public static GoogleSignInClient mGoogleSignInClient;
 
+    public static boolean backButtonEnabled;
+
+    private FragmentManager fragmentManager;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         Log.d(TAG, "Entering onCreate");
         super.onCreate(savedInstanceState);
+        fragmentManager = getSupportFragmentManager();
         setContentView(R.layout.activity_main);
 
         Toolbar toolbar = findViewById(R.id.toolbar);
@@ -38,6 +43,7 @@ public class MainActivity extends AppCompatActivity {
         ActionBar actionbar = getSupportActionBar();
         actionbar.setDisplayHomeAsUpEnabled(true);
         actionbar.setHomeAsUpIndicator(R.drawable.ic_menu_black_24dp);
+        backButtonEnabled = false;
 
         drawerLayout = findViewById(R.id.drawer_layout);
 
@@ -77,7 +83,6 @@ public class MainActivity extends AppCompatActivity {
                         } catch (Exception e) {
                             e.printStackTrace();
                         }
-                        FragmentManager fragmentManager = getSupportFragmentManager();
                         fragmentManager.beginTransaction().replace(R.id.fragContent, fragment).commit();
 
                         //DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -124,7 +129,11 @@ public class MainActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case android.R.id.home:
-                drawerLayout.openDrawer(GravityCompat.START);
+                 if (backButtonEnabled) {
+                     fragmentManager.popBackStack();
+                 } else {
+                     drawerLayout.openDrawer(GravityCompat.START);
+                 }
                 return true;
         }
         return super.onOptionsItemSelected(item);
