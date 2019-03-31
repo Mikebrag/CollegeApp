@@ -20,16 +20,27 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import android.util.Log;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity {
     private static final String TAG = "MainActivity";
+
     private DrawerLayout drawerLayout;
+
+    private NavigationView navView;
+
+    private View headerView;
+
+    private TextView headerTitleTextView;
 
     public static GoogleSignInClient mGoogleSignInClient;
 
     public static boolean backButtonEnabled;
 
     private FragmentManager fragmentManager;
+
+    private SharedPreferences sharedPref;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -100,13 +111,19 @@ public class MainActivity extends AppCompatActivity {
 
         GoogleSignInAccount mGoogleSignInAccount = GoogleSignIn.getLastSignedInAccount(this);
         if (mGoogleSignInAccount != null) {
-            SharedPreferences sharedPref = this.getPreferences(Context.MODE_PRIVATE);
+            sharedPref = getPreferences(Context.MODE_PRIVATE);
             SharedPreferences.Editor editor = sharedPref.edit();
             editor.putString(getString(R.string.user_display_name_key), mGoogleSignInAccount.getDisplayName());
             editor.putString(getString(R.string.user_given_name_key), mGoogleSignInAccount.getGivenName());
             editor.putString(getString(R.string.user_family_name_key), mGoogleSignInAccount.getFamilyName());
             editor.putString(getString(R.string.user_email_key), mGoogleSignInAccount.getEmail());
             editor.commit();
+            // Set nav header title to user name
+            sharedPref = getPreferences(Context.MODE_PRIVATE);
+            navView = findViewById(R.id.nav_view);
+            headerView = navView.getHeaderView(0);
+            headerTitleTextView = headerView.findViewById(R.id.header_title_text_view);
+            headerTitleTextView.setText("Hello, " + mGoogleSignInAccount.getGivenName());
         } else {
             Intent i = new Intent(MainActivity.this, LoginActivity.class);
             startActivity(i);

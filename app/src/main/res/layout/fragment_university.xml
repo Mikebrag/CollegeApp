@@ -4,12 +4,27 @@
     android:layout_height="match_parent">
 
     <TextView
-        android:id="@+id/university_id_text_view"
-        android:layout_width="wrap_content"
+        android:id="@+id/university_name_text_view"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textSize="24sp"
         android:paddingVertical="16sp"
         android:paddingLeft="8sp"
-        android:text="University"/>
+        android:text="University Name" />
+
+    <TextView
+        android:id="@+id/university_info_text_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="18sp"
+        android:paddingVertical="16sp"
+        android:paddingLeft="8sp"
+        android:text="University Info"/>
+
+    <Button
+        android:id="@+id/add_to_portfolio_button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/add_to_portfolio_button" />
 
 </LinearLayout>

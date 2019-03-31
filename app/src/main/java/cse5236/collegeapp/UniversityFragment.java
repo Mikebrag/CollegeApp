@@ -26,7 +26,8 @@ public class UniversityFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_university, container, false);
-        final TextView universityIdTextView = v.findViewById(R.id.university_id_text_view);
+        final TextView universityNameTextView = v.findViewById(R.id.university_name_text_view);
+        final TextView universityInfoTextView = v.findViewById(R.id.university_info_text_view);
         String universityId = getArguments().getString("universityId");
 
         // Find all users which match the child node email.
@@ -42,8 +43,8 @@ public class UniversityFragment extends Fragment {
                 String stateString = university.get("State");
                 String zipString = university.get("Zip");
                 String sizeString = university.get("Size");
-                String value = "University: " + nameString + " ID: " + idString + " Size: " + sizeString + "\n City: " + cityString + " State: " + stateString + " Zip " + zipString;
-                universityIdTextView.setText("\n\n" + value);
+                universityNameTextView.setText(nameString);
+                universityInfoTextView.setText("Size: " + sizeString + "\nCity: " + cityString + "\nState: " + stateString + "\nZip " + zipString);
             }
             @Override
             public void onCancelled(DatabaseError databaseError) {
