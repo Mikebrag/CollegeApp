@@ -1,5 +1,6 @@
 <resources>
     <string name="app_name">CollegeApp</string>
+    <string name="app_label">CollegeApp</string>
     <string name="title_activity_main">Main</string>
     <string name="title_activity_maps">Map</string>
     <string name="title_activity_account">Account</string>
@@ -37,4 +38,5 @@
     <string name="show_button">Show Note</string>
     <!--<string name="update_button">Update Message</string>-->
     <string name="add_to_portfolio_button">Add To Portfolio</string>
+    <string name="remove_from_portfolio_button">Remove from Portfolio</string>
 </resources>

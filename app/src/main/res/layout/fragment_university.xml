@@ -27,6 +27,17 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/add_to_portfolio_button"
-        android:layout_gravity="center_horizontal"/>
+        android:layout_gravity="center_horizontal"
+        android:visibility="gone"/>
+
+    <Button
+        android:id="@+id/remove_from_portfolio_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/remove_from_portfolio_button"
+        android:background="@color/colorRed"
+        android:backgroundTint="@color/colorRed"
+        android:layout_gravity="center_horizontal"
+        android:visibility="gone"/>
 
 </LinearLayout>

@@ -36,8 +36,10 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-        SignInButton buttonSignIn = findViewById(R.id.sign_in_button);
-        buttonSignIn.setOnClickListener(this);
+        SignInButton signInButton = findViewById(R.id.sign_in_button);
+        // Set the dimensions of the sign-in button.
+        signInButton.setSize(SignInButton.SIZE_WIDE);
+        signInButton.setOnClickListener(this);
         // Configure sign-in to request the user's ID, email address, and basic
         // profile. ID and basic profile are included in DEFAULT_SIGN_IN.
         GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)

@@ -98,7 +98,6 @@ public class UniversityListFragment extends Fragment {
                 // Bind the University object to the UniversityListViewHolder
                 holder.textView.setText(model.getName());
                 holder.universityId = model.getUniversityID();
-                Log.d(TAG, model.getName());
             }
         };
 
