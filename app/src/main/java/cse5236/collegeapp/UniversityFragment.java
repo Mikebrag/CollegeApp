@@ -1,9 +1,14 @@
 package cse5236.collegeapp;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
 
 import com.google.firebase.database.DataSnapshot;
@@ -19,32 +24,61 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 
 public class UniversityFragment extends Fragment {
+    private static final String TAG = "UniversityFragment";
 
+    SharedPreferences sharedPref;
+    FirebaseDatabase firebase;
     MainActivity mainActivity;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View v = inflater.inflate(R.layout.fragment_university, container, false);
+        final View v = inflater.inflate(R.layout.fragment_university, container, false);
         final TextView universityNameTextView = v.findViewById(R.id.university_name_text_view);
         final TextView universityInfoTextView = v.findViewById(R.id.university_info_text_view);
         String universityId = getArguments().getString("universityId");
 
-        // Find all users which match the child node email.
-        FirebaseDatabase firebase = FirebaseDatabase.getInstance();
+        sharedPref = PreferenceManager.getDefaultSharedPreferences(getActivity().getBaseContext());
+        firebase = FirebaseDatabase.getInstance();
         DatabaseReference ref = firebase.getReference("university");
         ref.child(universityId).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 HashMap<String, String> university = (HashMap<String, String>) dataSnapshot.getValue();
-                String nameString = university.get("Name");
-                String idString = university.get("UniversityID");
-                String cityString = university.get("City");
-                String stateString = university.get("State");
-                String zipString = university.get("Zip");
-                String sizeString = university.get("Size");
-                universityNameTextView.setText(nameString);
-                universityInfoTextView.setText("Size: " + sizeString + "\nCity: " + cityString + "\nState: " + stateString + "\nZip " + zipString);
+                final String universityName = university.get("Name");
+                final String universityId = university.get("UniversityID");
+                String universityCity = university.get("City");
+                String universityState = university.get("State");
+                String universityZip = university.get("Zip");
+                String universitySize = university.get("Size");
+                universityNameTextView.setText(universityName);
+                universityInfoTextView.setText("Size: " + universitySize + "\nCity: " + universityCity + "\nState: " + universityState + "\nZip " + universityZip);
+
+                // Set onClickListener for Add to Portfolio buton
+                Button addToPortfolioButton = v.findViewById(R.id.add_to_portfolio_button);
+                addToPortfolioButton.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+                            String defaultUserId = getResources().getString(R.string.default_user_id_key);
+                            final String userId = sharedPref.getString(getString(R.string.user_id_key), defaultUserId);
+                            Log.d(TAG, userId);
+                            final DatabaseReference dbRef = firebase.getReference("user").child(userId).child("portfolio");
+                            dbRef.addListenerForSingleValueEvent(new ValueEventListener() {
+                                @Override
+                                public void onDataChange(DataSnapshot dataSnapshot) {
+                                    if (!dataSnapshot.hasChild(userId)) {
+                                        // Add user info to Firebase
+                                        dbRef.child("universities").child(universityId).setValue(universityName);
+                                    }
+                                }
+                                @Override
+                                public void onCancelled(DatabaseError databaseError) {
+
+                                }
+                            });
+                        }
+                    }
+                );
             }
             @Override
             public void onCancelled(DatabaseError databaseError) {
@@ -52,7 +86,7 @@ public class UniversityFragment extends Fragment {
             }
         });
 
-
+        // Change action bar nav drawer button to a back button
         ActionBar actionbar = ((AppCompatActivity)getActivity()).getSupportActionBar();
         actionbar.setDisplayHomeAsUpEnabled(true);
         actionbar.setHomeAsUpIndicator(R.drawable.ic_arrow_back_black_24dp);
@@ -64,6 +98,7 @@ public class UniversityFragment extends Fragment {
     @Override
     public void onDestroyView () {
         super.onDestroyView();
+        // Change action back button to nav drawer button
         ActionBar actionbar = ((AppCompatActivity)getActivity()).getSupportActionBar();
         actionbar.setDisplayHomeAsUpEnabled(true);
         actionbar.setHomeAsUpIndicator(R.drawable.ic_menu_black_24dp);

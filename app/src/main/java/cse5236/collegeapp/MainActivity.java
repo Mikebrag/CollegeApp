@@ -18,6 +18,8 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+
+import android.preference.PreferenceManager;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
@@ -111,7 +113,7 @@ public class MainActivity extends AppCompatActivity {
 
         GoogleSignInAccount mGoogleSignInAccount = GoogleSignIn.getLastSignedInAccount(this);
         if (mGoogleSignInAccount != null) {
-            sharedPref = getPreferences(Context.MODE_PRIVATE);
+            sharedPref = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
             SharedPreferences.Editor editor = sharedPref.edit();
             editor.putString(getString(R.string.user_display_name_key), mGoogleSignInAccount.getDisplayName());
             editor.putString(getString(R.string.user_given_name_key), mGoogleSignInAccount.getGivenName());
@@ -119,7 +121,6 @@ public class MainActivity extends AppCompatActivity {
             editor.putString(getString(R.string.user_email_key), mGoogleSignInAccount.getEmail());
             editor.commit();
             // Set nav header title to user name
-            sharedPref = getPreferences(Context.MODE_PRIVATE);
             navView = findViewById(R.id.nav_view);
             headerView = navView.getHeaderView(0);
             headerTitleTextView = headerView.findViewById(R.id.header_title_text_view);

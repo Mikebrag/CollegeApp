@@ -14,6 +14,13 @@ import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.gms.common.SignInButton;
 import com.google.android.gms.common.api.ApiException;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
+import java.util.HashMap;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -92,13 +99,35 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
     private void updateUI(GoogleSignInAccount mGoogleSignInAccount) {
         if (mGoogleSignInAccount != null) {
+            final String userId = mGoogleSignInAccount.getId();
+            final String userEmail = mGoogleSignInAccount.getEmail();
+
+            // Add user info to SharedPreferences
             SharedPreferences sharedPref = this.getPreferences(Context.MODE_PRIVATE);
             SharedPreferences.Editor editor = sharedPref.edit();
             editor.putString(getString(R.string.user_display_name_key), mGoogleSignInAccount.getDisplayName());
             editor.putString(getString(R.string.user_given_name_key), mGoogleSignInAccount.getGivenName());
             editor.putString(getString(R.string.user_family_name_key), mGoogleSignInAccount.getFamilyName());
-            editor.putString(getString(R.string.user_email_key), mGoogleSignInAccount.getEmail());
+            editor.putString(getString(R.string.user_id_key), userId);
+            editor.putString(getString(R.string.user_email_key), userEmail);
             editor.commit();
+
+            // Get Firebase
+            FirebaseDatabase firebase = FirebaseDatabase.getInstance();
+            final DatabaseReference dbRef = firebase.getReference("user");
+            dbRef.addListenerForSingleValueEvent(new ValueEventListener() {
+                @Override
+                public void onDataChange(DataSnapshot dataSnapshot) {
+                    if (!dataSnapshot.hasChild(userId)) {
+                        // Add user info to Firebase
+                        dbRef.child(userId).setValue(new User(userId, userEmail));
+                    }
+                }
+                @Override
+                public void onCancelled(DatabaseError databaseError) {
+
+                }
+            });
             //AccountFragment.profilePicture = mGoogleSignInAccount.getPhotoUrl();
             Intent i = new Intent(LoginActivity.this, MainActivity.class);
             startActivity(i);

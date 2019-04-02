@@ -8,6 +8,8 @@ import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+
+import android.preference.PreferenceManager;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -31,23 +33,8 @@ public class AccountFragment extends Fragment implements View.OnClickListener {
     public static Uri profilePicture = null;
 
     @Override
-    public void onAttach(Context context) {
-        Log.d(TAG, "Entering onAttach");
-        super.onAttach(context);
-    }
-
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        Log.d(TAG, "Entering onCreate");
-        super.onCreate(savedInstanceState);
-    }
-
-    @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        Log.d(TAG, "Entering onCreateView");
-
-        Toast.makeText(getActivity(), R.string.title_activity_account, Toast.LENGTH_SHORT).show();
 
         View v = inflater.inflate(R.layout.fragment_account, container, false);
         Button signOutButton = v.findViewById(R.id.sign_out_button);
@@ -61,7 +48,7 @@ public class AccountFragment extends Fragment implements View.OnClickListener {
     public void onStart() {
         Log.d(TAG, "Entering onStart");
         super.onStart();
-        SharedPreferences sharedPref = getActivity().getPreferences(Context.MODE_PRIVATE);
+        SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(getActivity().getBaseContext());
         String defaultGivenName = getResources().getString(R.string.default_user_given_name_key);
         String givenName = sharedPref.getString(getString(R.string.user_given_name_key), defaultGivenName);
         String defaultFamilyName = getResources().getString(R.string.default_user_family_name_key);
@@ -79,42 +66,6 @@ public class AccountFragment extends Fragment implements View.OnClickListener {
         String email = sharedPref.getString(getString(R.string.user_email_key), defaultEmail);
         TextView emailView = getView().findViewById(R.id.user_email);
         emailView.setText(email);
-    }
-
-    @Override
-    public void onResume() {
-        Log.d(TAG, "Entering onResume");
-        super.onResume();
-    }
-
-    @Override
-    public void onPause() {
-        Log.d(TAG, "Entering onPause");
-        super.onPause();
-    }
-
-    @Override
-    public void onStop() {
-        Log.d(TAG, "Entering onStop");
-        super.onStop();
-    }
-
-    @Override
-    public void onDestroyView() {
-        Log.d(TAG, "Entering onDestroyView");
-        super.onDestroyView();
-    }
-
-    @Override
-    public void onDestroy() {
-        Log.d(TAG, "Entering onDestroy");
-        super.onDestroy();
-    }
-
-    @Override
-    public void onDetach() {
-        Log.d(TAG, "Entering onDetach");
-        super.onDetach();
     }
 
     @Override

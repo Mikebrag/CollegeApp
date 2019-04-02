@@ -23,6 +23,8 @@
     <string name="default_user_given_name_key">Default Given Name</string>
     <string name="user_family_name_key">user_family_name_key</string>
     <string name="default_user_family_name_key">Default Family Name</string>
+    <string name="user_id_key">user_id_key</string>
+    <string name="default_user_id_key">Default ID</string>
     <string name="user_email_key">user_email_key</string>
     <string name="default_user_email_key">Default Email</string>
     <string name="sign_out_button">Log Out</string>
