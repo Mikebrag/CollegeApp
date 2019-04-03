@@ -30,7 +30,7 @@ public class MapsFragment extends Fragment implements OnMapReadyCallback {
 
     private static final int LOCATION_REQUEST_CODE = 10001;
 
-    private static final int DEFAULT_ZOOM = 10;
+    private static final int DEFAULT_ZOOM = 7;
 
     private boolean mLocationPermissionGranted;
     private GoogleMap mMap;
@@ -42,7 +42,7 @@ public class MapsFragment extends Fragment implements OnMapReadyCallback {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         mLocationPermissionGranted = ContextCompat.checkSelfPermission(getActivity(), Manifest.permission.ACCESS_FINE_LOCATION)
-                != PackageManager.PERMISSION_GRANTED;
+                == PackageManager.PERMISSION_GRANTED;
 
         mDefaultLocation = new LatLng(40.002420, -83.015048);
 
@@ -57,7 +57,6 @@ public class MapsFragment extends Fragment implements OnMapReadyCallback {
         return v;
     }
 
-
     /**
      * Manipulates the map once available.
      * This callback is triggered when the map is ready to be used.
@@ -69,10 +68,11 @@ public class MapsFragment extends Fragment implements OnMapReadyCallback {
      */
     @Override
     public void onMapReady(GoogleMap googleMap) {
+
         mMap = googleMap;
 
         // Add a marker in Caldwell and move the camera
-        LatLng osu = new LatLng(40.002420, -83.015048);
+        LatLng osu = new LatLng(40.000419, -83.013857);
         mMap.addMarker(new MarkerOptions().position(osu).title("Marker at Ohio State"));
 
         LatLng ou = new LatLng(39.324358, -82.1013889);
@@ -102,7 +102,7 @@ public class MapsFragment extends Fragment implements OnMapReadyCallback {
                 mLastKnownLocation = null;
                 getLocationPermission();
             }
-        } catch (SecurityException e)  {
+        } catch (SecurityException e) {
             Log.e("Exception: %s", e.getMessage());
         }
     }
@@ -133,7 +133,7 @@ public class MapsFragment extends Fragment implements OnMapReadyCallback {
                     }
                 });
             }
-        } catch(SecurityException e)  {
+        } catch (SecurityException e) {
             Log.e("Exception: %s", e.getMessage());
         }
     }
@@ -147,7 +147,6 @@ public class MapsFragment extends Fragment implements OnMapReadyCallback {
                     LOCATION_REQUEST_CODE);
         }
     }
-
 
 
 }
