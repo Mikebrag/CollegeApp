@@ -7,6 +7,20 @@
     <View
         android:layout_width="fill_parent"
         android:layout_height="1dp"
+        android:layout_marginBottom="8sp"
+        android:background="@color/colorDarkGray" />
+
+    <SearchView
+        android:id="@+id/university_search_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:inputType="text"
+        android:iconifiedByDefault="false"/>
+
+    <View
+        android:layout_width="fill_parent"
+        android:layout_height="1dp"
+        android:layout_marginTop="8sp"
         android:background="@color/colorDarkGray" />
 
     <androidx.recyclerview.widget.RecyclerView

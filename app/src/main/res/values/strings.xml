@@ -39,4 +39,5 @@
     <!--<string name="update_button">Update Message</string>-->
     <string name="add_to_portfolio_button">Add To Portfolio</string>
     <string name="remove_from_portfolio_button">Remove from Portfolio</string>
+    <string name="university_list_search_hint">Search Universities</string>
 </resources>
