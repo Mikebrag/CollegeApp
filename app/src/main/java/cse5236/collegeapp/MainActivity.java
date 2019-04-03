@@ -1,8 +1,10 @@
 package cse5236.collegeapp;
 
+import android.Manifest;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
 
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
@@ -11,6 +13,8 @@ import com.google.android.gms.auth.api.signin.GoogleSignInClient;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.material.navigation.NavigationView;
 
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.core.view.GravityCompat;
@@ -44,6 +48,8 @@ public class MainActivity extends AppCompatActivity {
 
     private SharedPreferences sharedPref;
 
+    private static final int LOCATION_REQUEST_CODE = 10001;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         Log.d(TAG, "Entering onCreate");
@@ -75,10 +81,7 @@ public class MainActivity extends AppCompatActivity {
                                 fragmentClass = PortfolioFragment.class;
                                 break;
                             case R.id.nav_maps:
-                                Intent myIntent = new Intent(MainActivity.this, MapsActivity.class);
-                                MainActivity.this.startActivity(myIntent);
-//                                Toast.makeText(MainActivity.this, R.string.title_activity_maps, Toast.LENGTH_SHORT).show();
-//                                fragmentClass = MapsActivity.class;
+                                fragmentClass = MapsFragment.class;
                                 break;
                             case R.id.nav_account:
                                 fragmentClass = AccountFragment.class;
@@ -88,9 +91,8 @@ public class MainActivity extends AppCompatActivity {
                                 break;
                         }
 
-                        // Add code here to update the UI based on the item selected
-                        // For example, swap UI fragments here
 
+                        // Swap fragments
                         try {
                             fragment = (Fragment) fragmentClass.newInstance();
                         } catch (Exception e) {
@@ -101,6 +103,7 @@ public class MainActivity extends AppCompatActivity {
                         //DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
                         //drawer.closeDrawer(GravityCompat.START);
                         return true;
+
                     }
                 });
 
@@ -129,18 +132,26 @@ public class MainActivity extends AppCompatActivity {
             Intent i = new Intent(MainActivity.this, LoginActivity.class);
             startActivity(i);
         }
-    }
 
-    @Override
-    protected void onStart() {
-        Log.d(TAG, "Entering onStart");
-        super.onStart();
-    }
+        // Start portfolio fragment
+        Fragment portfolioFragment = null;
+        Class portfolioFragmentClass = PortfolioFragment.class;
+        try {
+            portfolioFragment = (Fragment) portfolioFragmentClass.newInstance();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        fragmentManager.beginTransaction().replace(R.id.fragContent, portfolioFragment).commit();
 
-    @Override
-    protected void onResume() {
-        Log.d(TAG, "Entering onResume");
-        super.onResume();
+
+        // Check for fine location permission
+        if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION)
+                != PackageManager.PERMISSION_GRANTED) {
+            // Permission is not granted, request location permission
+            ActivityCompat.requestPermissions(this,
+                    new String[]{Manifest.permission.ACCESS_FINE_LOCATION},
+                    LOCATION_REQUEST_CODE);
+        }
     }
 
     @Override
@@ -156,25 +167,6 @@ public class MainActivity extends AppCompatActivity {
         }
         return super.onOptionsItemSelected(item);
     }
-
-    @Override
-    protected void onPause() {
-        Log.d(TAG, "Entering onPause");
-        super.onPause();
-    }
-
-    @Override
-    protected void onStop() {
-        Log.d(TAG, "Entering onStop");
-        super.onStop();
-    }
-
-    @Override
-    protected void onDestroy() {
-        Log.d(TAG, "Entering onDestroy");
-        super.onDestroy();
-    }
-
 
 }
 

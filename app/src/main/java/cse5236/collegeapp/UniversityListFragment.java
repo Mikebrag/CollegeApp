@@ -57,7 +57,13 @@ public class UniversityListFragment extends Fragment {
             }
 
             @Override
-            public boolean onQueryTextChange(String s) {
+            public boolean onQueryTextChange(String searchText) {
+                if (searchText.length() == 0) {
+                    firebaseRecyclerAdapter = searchFirebase(searchText.toLowerCase());
+                    recyclerView.setAdapter(firebaseRecyclerAdapter);
+                    firebaseRecyclerAdapter.startListening();
+                    Log.d(TAG, "Query submitted");
+                }
                 return false;
             }
         });
@@ -116,7 +122,6 @@ public class UniversityListFragment extends Fragment {
         firebaseRecyclerAdapter.startListening();
     }
 
-
     @Override
     public void onStop() {
         super.onStop();
@@ -125,12 +130,15 @@ public class UniversityListFragment extends Fragment {
 
     public FirebaseRecyclerAdapter searchFirebase(String searchText) {
         // Get Firebase instance
-        Query query = FirebaseDatabase.getInstance().getReference("university")
-                .orderByChild("QueryTag")
-                .startAt(searchText)
-                .endAt(searchText+"\uf8ff");
-
-        Log.d(TAG, searchText);
+        Query query;
+        if (searchText.length() > 0) {
+            query = FirebaseDatabase.getInstance().getReference("university")
+                    .orderByChild("QueryTag")
+                    .startAt(searchText)
+                    .endAt(searchText+"\uf8ff");
+        } else {
+            query = FirebaseDatabase.getInstance().getReference("university");
+        }
 
         FirebaseRecyclerOptions<University> options =
                 new FirebaseRecyclerOptions.Builder<University>()
