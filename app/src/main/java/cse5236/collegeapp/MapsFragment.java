@@ -30,7 +30,7 @@ public class MapsFragment extends Fragment implements OnMapReadyCallback {
 
     private static final int LOCATION_REQUEST_CODE = 10001;
 
-    private static final int DEFAULT_ZOOM = 7;
+    private static final int DEFAULT_ZOOM = 9;
 
     private boolean mLocationPermissionGranted;
     private GoogleMap mMap;
