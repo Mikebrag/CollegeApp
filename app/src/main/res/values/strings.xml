@@ -40,4 +40,8 @@
     <string name="add_to_portfolio_button">Add To Portfolio</string>
     <string name="remove_from_portfolio_button">Remove from Portfolio</string>
     <string name="university_list_search_hint">Search Universities</string>
+    <string name="my_notes">My Notes</string>
+    <string name="my_universities">My Universities</string>
+    <string name="my_portfolio">My Portfolio</string>
+    <string name="add_note">Add Note</string>
 </resources>

@@ -46,8 +46,8 @@ public class UniversityFragment extends Fragment {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
 
-                HashMap<String, String> university = (HashMap<String, String>) dataSnapshot.getValue();
-                final String universityName = university.get("Name");
+                final HashMap<String, String> university = (HashMap<String, String>) dataSnapshot.getValue();
+                String universityName = university.get("Name");
                 final String universityId = university.get("UniversityID");
                 String universityCity = university.get("City");
                 String universityState = university.get("State");
@@ -98,7 +98,7 @@ public class UniversityFragment extends Fragment {
                             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                                 if (!dataSnapshot.child("portfolio").child("universities").hasChild(universityId)) {
                                     // Add user info to Firebase
-                                    dbRef.child("portfolio").child("universities").child(universityId).setValue(universityName);
+                                    dbRef.child("portfolio").child("universities").child(universityId).setValue(university);
                                 }
                             }
                             @Override

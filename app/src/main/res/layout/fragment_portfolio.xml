@@ -4,83 +4,30 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <Spinner
-        android:id="@+id/collegeList"
+    <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@android:drawable/btn_dropdown"
-        android:spinnerMode="dropdown"
-        android:text="Select College"/>
-
-    <EditText
-        android:id="@+id/edittext_subject"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:ems="10"
-        android:hint="Enter Note Subject" android:inputType="text" />
-
-    <EditText
-        android:id="@+id/edittext_date"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:ems="10"
-        android:hint="Enter Note Date" android:inputType="text" />
-
-    <EditText
-        android:id="@+id/edittext_id"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:ems="10"
-        android:hint="Enter NoteID" android:inputType="text" />
-
-    <EditText
-        android:id="@+id/edittext_body"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:ems="10"
-        android:hint="Enter Note Body" android:inputType="text" />
+        android:paddingLeft="15sp"
+        android:paddingTop="20sp"
+        android:paddingBottom="20sp"
+        android:text="@string/my_portfolio"
+        android:textAppearance="@style/TextAppearance.MaterialComponents.Headline4" />
 
     <Button
-        android:id="@+id/add_button"
-        android:layout_width="wrap_content"
+        android:id="@+id/my_universities_button"
+        android:layout_width="200sp"
         android:layout_height="wrap_content"
-        android:text="@string/add_button" />
-
-    <EditText
-        android:id="@+id/edittext_delete"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:ems="10"
-        android:hint="Enter NoteID To Delete" android:inputType="text" />
+        android:layout_marginVertical="10sp"
+        android:layout_marginLeft="20sp"
+        android:text="@string/my_universities" />
 
     <Button
-        android:id="@+id/delete_button"
-        android:layout_width="wrap_content"
+        android:id="@+id/my_notes_button"
+        android:layout_width="200sp"
         android:layout_height="wrap_content"
-        android:text="@string/delete_button" />
-    <!--
-       <Button
-           android:id="@+id/update_button"
-           android:layout_width="wrap_content"
-           android:layout_height="wrap_content"
-           android:text="@string/update_button" />
-    -->
-       <Button
-           android:id="@+id/show_button"
-           android:layout_width="wrap_content"
-           android:layout_height="wrap_content"
-           android:text="@string/show_button" />
-
-       <TextView
-           android:id="@+id/simpleTextView"
-           android:layout_width="fill_parent"
-           android:layout_height="wrap_content"
-           android:baselineAligned="false"
-           android:hint="Click Show Message to retrieve" />
+        android:layout_marginVertical="10sp"
+        android:layout_marginLeft="20sp"
+        android:text="@string/my_notes" />
 
 
-
-   </LinearLayout>
-
-
-
+</LinearLayout>

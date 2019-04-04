@@ -96,7 +96,6 @@ public class UniversityListFragment extends Fragment {
                         FragmentManager fragmentManager = getFragmentManager();
                         fragmentManager.beginTransaction().replace(R.id.fragContent, universityFragment, "universityList")
                                 .addToBackStack("universityList").commit();
-                        //Toast.makeText(getActivity(), "Item clicked " + universityId, Toast.LENGTH_SHORT).show();
                     }
                 });
                 return universityListViewHolder;
@@ -118,7 +117,6 @@ public class UniversityListFragment extends Fragment {
     @Override
     public void onStart() {
         super.onStart();
-        Log.d(TAG, "Listening");
         firebaseRecyclerAdapter.startListening();
     }
 
