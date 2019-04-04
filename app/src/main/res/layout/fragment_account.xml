@@ -12,17 +12,22 @@
     <TextView android:id="@+id/user_full_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:padding="10sp"
+        android:textAppearance="@style/TextAppearance.MaterialComponents.Subtitle1"
         android:text="Insert Full Name" />
 
     <TextView android:id="@+id/user_email"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:padding="10sp"
+        android:textAppearance="@style/TextAppearance.MaterialComponents.Subtitle1"
         android:text="Insert Email" />
 
     <Button
         android:id="@+id/sign_out_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_margin="10sp"
         android:text="@string/sign_out_button"/>
 
     <Button
