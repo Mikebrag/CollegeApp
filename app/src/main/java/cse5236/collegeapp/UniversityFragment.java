@@ -185,7 +185,7 @@ public class UniversityFragment extends Fragment {
 
 
         DatabaseReference appRef = firebase.getReference("application");
-        ratingRef.addListenerForSingleValueEvent(new ValueEventListener() {
+        appRef.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 for (DataSnapshot postSnapshot: dataSnapshot.getChildren()) {
