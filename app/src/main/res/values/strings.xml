@@ -44,4 +44,5 @@
     <string name="my_universities">My Universities</string>
     <string name="my_portfolio">My Portfolio</string>
     <string name="add_note">Add Note</string>
+    <string name="completed_app">Application submitted?</string>
 </resources>

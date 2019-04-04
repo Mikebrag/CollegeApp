@@ -9,6 +9,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.RatingBar;
 import android.widget.TextView;
 
@@ -34,6 +35,7 @@ public class UniversityFragment extends Fragment {
     MainActivity mainActivity;
 
     int ratingID =0;
+    int applicationID = 0;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -177,6 +179,45 @@ public class UniversityFragment extends Fragment {
                 myRef.child("rating").child(userId+"_"+universityId).setValue(r);
             }
         });
+
+
+        final CheckBox checkCompletedApp = (CheckBox) v.findViewById(R.id.university_completed_app);
+
+
+        DatabaseReference appRef = firebase.getReference("application");
+        ratingRef.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                for (DataSnapshot postSnapshot: dataSnapshot.getChildren()) {
+                    HashMap<String, String> data = (HashMap<String, String>) postSnapshot.getValue();
+                    String defaultUserId = getResources().getString(R.string.default_user_id_key);
+                    final String userId = sharedPref.getString(getString(R.string.user_id_key), defaultUserId);
+                    if(data.get("UniversityID").equals(universityId) && data.get("UserID").equals(userId)){
+                        checkCompletedApp.setChecked(true);
+                    }
+
+                }
+            }
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+
+        checkCompletedApp.setOnClickListener(new View.OnClickListener() {
+            String defaultUserId = getResources().getString(R.string.default_user_id_key);
+            final String userId = sharedPref.getString(getString(R.string.user_id_key), defaultUserId);
+            @Override
+            public void onClick(View v) {
+                if (((CheckBox) v).isChecked()) {
+
+                    Application app = new Application((applicationID++)+"", universityId, userId);
+                    DatabaseReference myRef = firebase.getReference();
+                    myRef.child("application").child(userId+"_"+universityId).setValue(app);
+                }
+            }
+        });
+
 
         // Change action bar nav drawer button to a back button
         ActionBar actionbar = ((AppCompatActivity) getActivity()).getSupportActionBar();

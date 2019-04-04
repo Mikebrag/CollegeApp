@@ -29,6 +29,12 @@
         android:numStars="5"
         android:stepSize="1.0"/>
 
+    <CheckBox
+        android:id="@+id/university_completed_app"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/completed_app" />
+
     <Button
         android:id="@+id/add_to_portfolio_button"
         android:layout_width="wrap_content"
