@@ -33,7 +33,7 @@ public class UniversityFragment extends Fragment {
     FirebaseDatabase firebase;
     MainActivity mainActivity;
 
-    String size = "0";
+    int ratingID =0;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -152,13 +152,13 @@ public class UniversityFragment extends Fragment {
                 String rate = String.valueOf(rating);
                 String defaultUserId = getResources().getString(R.string.default_user_id_key);
                 final String userId = sharedPref.getString(getString(R.string.user_id_key), defaultUserId);
-                final Rating r = new Rating(rate, "0", universityId, userId);
+                final Rating r = new Rating(rate, (ratingID++)+"", universityId, userId);
 //                ratingRef.addListenerForSingleValueEvent(new ValueEventListener() {
 //                    @Override
 //                    public void onDataChange(DataSnapshot dataSnapshot) {
 //                        if (dataSnapshot.exists()) {
 //                            //String value = dataSnapshot.getValue(String.class);
-//                            size = (((ArrayList<Object>) dataSnapshot.getValue()).size())+"";
+//                            //size = (((ArrayList<Object>) dataSnapshot.getValue()).size())+"";
 //                        }
 //                    }
 //                    @Override
@@ -167,7 +167,7 @@ public class UniversityFragment extends Fragment {
 //                    }
 //                });
                 DatabaseReference myRef = firebase.getReference();
-                myRef.child("rating").child(size).setValue(r);
+                myRef.child("rating").child(userId+"_"+universityId).setValue(r);
             }
         });
 
