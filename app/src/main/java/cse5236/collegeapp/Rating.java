@@ -21,6 +21,13 @@ public class Rating {
         UserID = u2;
     }
 
+    public Rating(String r, String r1, String u1, String u2){
+        Rating = r;
+        RatingID = r1;
+        UniversityID = u1;
+        UserID = u2;
+    }
+
     public String toString(){
         return "";
     }

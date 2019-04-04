@@ -9,6 +9,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.RatingBar;
 import android.widget.TextView;
 
 import com.google.firebase.database.DataSnapshot;
@@ -17,6 +18,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 
 import androidx.annotation.NonNull;
@@ -31,13 +33,16 @@ public class UniversityFragment extends Fragment {
     FirebaseDatabase firebase;
     MainActivity mainActivity;
 
+    String size = "0";
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         final View v = inflater.inflate(R.layout.fragment_university, container, false);
         final TextView universityNameTextView = v.findViewById(R.id.university_name_text_view);
         final TextView universityInfoTextView = v.findViewById(R.id.university_info_text_view);
-        String universityId = getArguments().getString("universityId");
+        final RatingBar ratingBar = v.findViewById(R.id.university_rating_bar);
+        final String universityId = getArguments().getString("universityId");
 
         sharedPref = PreferenceManager.getDefaultSharedPreferences(getActivity().getBaseContext());
         firebase = FirebaseDatabase.getInstance();
@@ -139,6 +144,32 @@ public class UniversityFragment extends Fragment {
             }
         });
 
+        ratingBar.setOnRatingBarChangeListener(new RatingBar.OnRatingBarChangeListener() {
+            public void onRatingChanged(RatingBar ratingBar, float rating,
+                                        boolean fromUser) {
+
+                DatabaseReference ratingRef = firebase.getReference("rating");
+                String rate = String.valueOf(rating);
+                String defaultUserId = getResources().getString(R.string.default_user_id_key);
+                final String userId = sharedPref.getString(getString(R.string.user_id_key), defaultUserId);
+                final Rating r = new Rating(rate, "0", universityId, userId);
+//                ratingRef.addListenerForSingleValueEvent(new ValueEventListener() {
+//                    @Override
+//                    public void onDataChange(DataSnapshot dataSnapshot) {
+//                        if (dataSnapshot.exists()) {
+//                            //String value = dataSnapshot.getValue(String.class);
+//                            size = (((ArrayList<Object>) dataSnapshot.getValue()).size())+"";
+//                        }
+//                    }
+//                    @Override
+//                    public void onCancelled(DatabaseError databaseError) {
+//
+//                    }
+//                });
+                DatabaseReference myRef = firebase.getReference();
+                myRef.child("rating").child(size).setValue(r);
+            }
+        });
 
         // Change action bar nav drawer button to a back button
         ActionBar actionbar = ((AppCompatActivity) getActivity()).getSupportActionBar();
