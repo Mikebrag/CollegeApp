@@ -144,28 +144,35 @@ public class UniversityFragment extends Fragment {
             }
         });
 
+        DatabaseReference ratingRef = firebase.getReference("rating");
+        ratingRef.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                for (DataSnapshot postSnapshot: dataSnapshot.getChildren()) {
+                    HashMap<String, String> data = (HashMap<String, String>) postSnapshot.getValue();
+                    String defaultUserId = getResources().getString(R.string.default_user_id_key);
+                    final String userId = sharedPref.getString(getString(R.string.user_id_key), defaultUserId);
+                    if(data.get("UniversityID").equals(universityId) && data.get("UserID").equals(userId)){
+                        float f =Float.parseFloat(data.get("Rating"));
+                        ratingBar.setRating(f);
+                    }
+
+                }
+            }
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+
         ratingBar.setOnRatingBarChangeListener(new RatingBar.OnRatingBarChangeListener() {
             public void onRatingChanged(RatingBar ratingBar, float rating,
                                         boolean fromUser) {
-
-                DatabaseReference ratingRef = firebase.getReference("rating");
                 String rate = String.valueOf(rating);
                 String defaultUserId = getResources().getString(R.string.default_user_id_key);
                 final String userId = sharedPref.getString(getString(R.string.user_id_key), defaultUserId);
                 final Rating r = new Rating(rate, (ratingID++)+"", universityId, userId);
-//                ratingRef.addListenerForSingleValueEvent(new ValueEventListener() {
-//                    @Override
-//                    public void onDataChange(DataSnapshot dataSnapshot) {
-//                        if (dataSnapshot.exists()) {
-//                            //String value = dataSnapshot.getValue(String.class);
-//                            //size = (((ArrayList<Object>) dataSnapshot.getValue()).size())+"";
-//                        }
-//                    }
-//                    @Override
-//                    public void onCancelled(DatabaseError databaseError) {
-//
-//                    }
-//                });
+
                 DatabaseReference myRef = firebase.getReference();
                 myRef.child("rating").child(userId+"_"+universityId).setValue(r);
             }
