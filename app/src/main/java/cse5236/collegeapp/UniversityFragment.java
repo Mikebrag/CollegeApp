@@ -209,11 +209,14 @@ public class UniversityFragment extends Fragment {
             final String userId = sharedPref.getString(getString(R.string.user_id_key), defaultUserId);
             @Override
             public void onClick(View v) {
+                Application app = new Application((applicationID++)+"", universityId, userId);
+                DatabaseReference myRef = firebase.getReference();
                 if (((CheckBox) v).isChecked()) {
-
-                    Application app = new Application((applicationID++)+"", universityId, userId);
-                    DatabaseReference myRef = firebase.getReference();
                     myRef.child("application").child(userId+"_"+universityId).setValue(app);
+                }
+                else
+                {
+                    myRef.child("application").child(userId+"_"+universityId).removeValue();
                 }
             }
         });
