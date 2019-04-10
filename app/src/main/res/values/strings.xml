@@ -33,10 +33,7 @@
     <string name="user_profile_picture">user_profile_picture</string>
 
     <string name="server_client_id">561304898009-neqhgfukgtvq2ivqklvmo7k323tbab9v.apps.googleusercontent.com</string>
-    <string name="add_button">Add/Update Note</string>
-    <string name="delete_button">Delete Notes</string>
-    <string name="show_button">Show Note</string>
-    <!--<string name="update_button">Update Message</string>-->
+
     <string name="add_to_portfolio_button">Add To Portfolio</string>
     <string name="remove_from_portfolio_button">Remove from Portfolio</string>
     <string name="university_list_search_hint">Search Universities</string>
@@ -44,5 +41,8 @@
     <string name="my_universities">My Universities</string>
     <string name="my_portfolio">My Portfolio</string>
     <string name="add_note">Add Note</string>
+    <string name="edit_note">Edit Note</string>
+    <string name="delete_note">Delete Note</string>
+    <string name="update_note">Update Note</string>
     <string name="completed_app">Application submitted?</string>
 </resources>

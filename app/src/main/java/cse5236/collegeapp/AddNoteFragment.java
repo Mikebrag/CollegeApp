@@ -25,15 +25,14 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Calendar;
 
 public class AddNoteFragment extends Fragment {
     private static final String TAG = "PortfolioFragment";
 
     private MainActivity mainActivity;
     private Button mAddButton;
-    private Button mDeleteButton;
     private Button mShowButton;
-    private Button mUpdateButton;
     private SharedPreferences sharedPref;
 
     @Override
@@ -46,50 +45,10 @@ public class AddNoteFragment extends Fragment {
         String defaultUserId = getResources().getString(R.string.default_user_id_key);
         final String userId = sharedPref.getString(getString(R.string.user_id_key), defaultUserId);
 
-        mAddButton = (Button) v.findViewById(R.id.add_button);
-        mDeleteButton = (Button) v.findViewById(R.id.delete_button);
-        mShowButton = (Button) v.findViewById(R.id.show_button);
-        //mUpdateButton = (Button) v.findViewById(R.id.update_button);
-        final TextView textView = (TextView) v.findViewById(R.id.simpleTextView);
-        final EditText mTitle = (EditText) v.findViewById(R.id.edittext_title);
-        final EditText mDate = (EditText) v.findViewById(R.id.edittext_date);
-        final EditText mId = (EditText) v.findViewById(R.id.edittext_id);
-        final EditText mBody = (EditText) v.findViewById(R.id.edittext_body);
-        final EditText mDelete = (EditText) v.findViewById(R.id.edittext_delete);
-
-        //get the spinner from the xml.
-        Spinner dropdown = v.findViewById(R.id.collegeList);
-        // create a list of items for the spinner.
-        final ArrayList<String> spinnerItems = new ArrayList<>();
-        FirebaseDatabase database = FirebaseDatabase.getInstance();
-
-        DatabaseReference myRef = database.getReference("university");
-        myRef.addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                if (dataSnapshot.exists()) {
-                    //String value = dataSnapshot.getValue(String.class);
-                    ArrayList<Object> newPost = (ArrayList<Object>) dataSnapshot.getValue();
-                    for (int i = 1; i < newPost.size(); i++) {
-                        HashMap<String, String> university = (HashMap<String, String>) newPost.get(i);
-                        String nameString = university.get("Name");
-                        spinnerItems.add(nameString);
-                    }
-                }
-            }
-
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-
-            }
-        });
-
-
-        //create an adapter to describe how the items are displayed, adapters are used in several places in android.
-        //There are multiple variations of this, but this is the basic variant.
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this.getActivity(), android.R.layout.simple_spinner_dropdown_item, spinnerItems);
-        //set the spinners adapter to the previously created one.
-        dropdown.setAdapter(adapter);
+        mAddButton = v.findViewById(R.id.add_note_button);
+        final EditText mTitle = v.findViewById(R.id.title_edit_text);
+        final EditText mDate = v.findViewById(R.id.date_edit_text);
+        final EditText mBody = v.findViewById(R.id.body_edit_text);
 
         mAddButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -100,52 +59,11 @@ public class AddNoteFragment extends Fragment {
 
                 String title = mTitle.getText().toString();
                 String d = mDate.getText().toString();
-                String nID = mId.getText().toString();
+                String nID = title + Calendar.getInstance().getTime().toString();
                 String b = mBody.getText().toString();
 
                 Note note1 = new Note(b, d, nID, title);
                 myRef.child(userId).child("portfolio").child("notes").child(nID).setValue(note1);
-            }
-        });
-        mDeleteButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                FirebaseDatabase database = FirebaseDatabase.getInstance();
-                DatabaseReference myRef = database.getReference("user");
-                String nID = mDelete.getText().toString();
-                myRef.child(userId).child("portfolio").child("notes").child(nID).removeValue();
-                //textView.setText("");
-            }
-        });
-
-        mShowButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                FirebaseDatabase database = FirebaseDatabase.getInstance();
-                DatabaseReference myRef = database.getReference("user");
-                myRef.addListenerForSingleValueEvent(new ValueEventListener() {
-                    @Override
-                    public void onDataChange(DataSnapshot dataSnapshot) {
-                        if (dataSnapshot.exists()) {
-                            //String value = dataSnapshot.getValue(String.class);
-                            HashMap<String, String> note = (HashMap<String, String>) dataSnapshot.getValue();
-                            dataSnapshot.child(userId).child("portfolio").child("notes").getValue();
-                            String titleString = note.get("Title");
-                            String dateString = note.get("Date");
-                            String noteIDString = note.get("NoteID");
-                            String bodyString = note.get("Body");
-                            String value = "Title: " + titleString + " Date: " + dateString + " NoteID: " + noteIDString + " Body: " + bodyString;
-                            textView.append("\n\n" + value);
-
-                        }
-                    }
-
-                    @Override
-                    public void onCancelled(DatabaseError databaseError) {
-
-                    }
-                });
-
             }
         });
 

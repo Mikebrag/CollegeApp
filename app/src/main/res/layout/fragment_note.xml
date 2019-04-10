@@ -1,22 +1,58 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
 
     <TextView
         android:id="@+id/note_title_text_view"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:padding="10sp"
-        android:textAppearance="@style/TextAppearance.MaterialComponents.Headline5"
-        android:text="Title"/>
+        android:text="Title"
+        android:textAppearance="@style/TextAppearance.MaterialComponents.Headline5" />
 
     <TextView
         android:id="@+id/note_body_text_view"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:padding="10sp"
+        android:text="Body"
+        android:textAppearance="@style/TextAppearance.MaterialComponents.Body1" />
+
+    <EditText
+        android:id="@+id/note_body_edit_text"
+        android:gravity="top"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:inputType="textMultiLine"
         android:padding="10sp"
         android:textAppearance="@style/TextAppearance.MaterialComponents.Body1"
-        android:text="Body"/>
+        android:visibility="gone" />
+
+    <Button
+        android:id="@+id/edit_note_button"
+        android:layout_width="200sp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:text="@string/edit_note" />
+
+    <Button
+        android:id="@+id/delete_note_button"
+        android:layout_width="200sp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:backgroundTint="@color/colorRed"
+        android:text="@string/delete_note" />
+
+    <Button
+        android:id="@+id/update_note_button"
+        android:layout_width="200sp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:text="@string/update_note"
+        android:visibility="gone"/>
 
 </LinearLayout>

@@ -2,85 +2,43 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical">
-
-    <Spinner
-        android:id="@+id/collegeList"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@android:drawable/btn_dropdown"
-        android:spinnerMode="dropdown"
-        android:text="Select University"/>
+    android:orientation="vertical"
+    android:padding="10dp">
 
     <EditText
-        android:id="@+id/edittext_title"
+        android:id="@+id/title_edit_text"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:ems="10"
-        android:hint="Enter Note Title" android:inputType="text" />
+        android:hint="Enter Note Title"
+        android:inputType="text" />
 
     <EditText
-        android:id="@+id/edittext_date"
+        android:id="@+id/date_edit_text"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:ems="10"
-        android:hint="Enter Note Date" android:inputType="text" />
+        android:hint="Enter Note Date"
+        android:inputType="text" />
 
     <EditText
-        android:id="@+id/edittext_id"
+        android:id="@+id/body_edit_text"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
+        android:layout_weight="1"
         android:ems="10"
-        android:hint="Enter NoteID" android:inputType="text" />
-
-    <EditText
-        android:id="@+id/edittext_body"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:ems="10"
-        android:hint="Enter Note Body" android:inputType="text" />
+        android:gravity="top"
+        android:hint="Enter Note Body"
+        android:inputType="textMultiLine" />
 
     <Button
-        android:id="@+id/add_button"
-        android:layout_width="wrap_content"
+        android:id="@+id/add_note_button"
+        android:layout_width="200sp"
         android:layout_height="wrap_content"
-        android:text="@string/add_button" />
+        android:layout_gravity="center_horizontal"
+        android:text="@string/add_note" />
 
-    <EditText
-        android:id="@+id/edittext_delete"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:ems="10"
-        android:hint="Enter NoteID To Delete" android:inputType="text" />
-
-    <Button
-        android:id="@+id/delete_button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/delete_button" />
-    <!--
-       <Button
-           android:id="@+id/update_button"
-           android:layout_width="wrap_content"
-           android:layout_height="wrap_content"
-           android:text="@string/update_button" />
-    -->
-       <Button
-           android:id="@+id/show_button"
-           android:layout_width="wrap_content"
-           android:layout_height="wrap_content"
-           android:text="@string/show_button" />
-
-       <TextView
-           android:id="@+id/simpleTextView"
-           android:layout_width="fill_parent"
-           android:layout_height="wrap_content"
-           android:baselineAligned="false"
-           android:hint="Click Show Message to retrieve" />
-
-
-
-   </LinearLayout>
+</LinearLayout>
 
 
 
