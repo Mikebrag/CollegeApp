@@ -14,14 +14,6 @@
         android:inputType="text" />
 
     <EditText
-        android:id="@+id/date_edit_text"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:ems="10"
-        android:hint="Enter Note Date"
-        android:inputType="text" />
-
-    <EditText
         android:id="@+id/body_edit_text"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"

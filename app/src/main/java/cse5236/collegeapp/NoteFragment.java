@@ -16,6 +16,8 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import org.w3c.dom.Text;
+
 import java.util.HashMap;
 
 import androidx.annotation.NonNull;
@@ -43,6 +45,7 @@ public class NoteFragment extends Fragment implements View.OnClickListener {
                              Bundle savedInstanceState) {
         fragmentNoteView = inflater.inflate(R.layout.fragment_note, container, false);
         final TextView noteTitleTextView = fragmentNoteView.findViewById(R.id.note_title_text_view);
+        final TextView noteDateTextView = fragmentNoteView.findViewById(R.id.note_date_text_view);
         final TextView noteBodyTextView = fragmentNoteView.findViewById(R.id.note_body_text_view);
         final TextView noteBodyEditText = fragmentNoteView.findViewById(R.id.note_body_edit_text);
 
@@ -72,6 +75,7 @@ public class NoteFragment extends Fragment implements View.OnClickListener {
             public void onDataChange(DataSnapshot dataSnapshot) {
                 final HashMap<String, String> note = (HashMap<String, String>) dataSnapshot.getValue();
                 noteTitleTextView.setText(note.get("Title"));
+                noteDateTextView.setText(note.get("Date"));
                 String body = note.get("Body");
                 noteBodyTextView.setText(body);
                 noteBodyEditText.setText(body);

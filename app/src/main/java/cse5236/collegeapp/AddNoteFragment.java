@@ -47,7 +47,6 @@ public class AddNoteFragment extends Fragment {
 
         mAddButton = v.findViewById(R.id.add_note_button);
         final EditText mTitle = v.findViewById(R.id.title_edit_text);
-        final EditText mDate = v.findViewById(R.id.date_edit_text);
         final EditText mBody = v.findViewById(R.id.body_edit_text);
 
         mAddButton.setOnClickListener(new View.OnClickListener() {
@@ -57,9 +56,11 @@ public class AddNoteFragment extends Fragment {
                 FirebaseDatabase database = FirebaseDatabase.getInstance();
                 DatabaseReference myRef = database.getReference("user");
 
+                String date = Calendar.getInstance().getTime().toString();
+
                 String title = mTitle.getText().toString();
-                String d = mDate.getText().toString();
-                String nID = title + Calendar.getInstance().getTime().toString();
+                String d = date;
+                String nID = title + " " + date;
                 String b = mBody.getText().toString();
 
                 Note note1 = new Note(b, d, nID, title);
