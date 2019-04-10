@@ -6,6 +6,7 @@ import android.os.Bundle;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
 
 import android.preference.PreferenceManager;
 import android.view.LayoutInflater;
@@ -34,11 +35,15 @@ public class AddNoteFragment extends Fragment {
     private Button mAddButton;
     private Button mShowButton;
     private SharedPreferences sharedPref;
+    private FragmentManager fragmentManager;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_add_note, container, false);
+
+        // Get fragment manager
+        fragmentManager = getFragmentManager();
 
         // get userId
         sharedPref = PreferenceManager.getDefaultSharedPreferences(getActivity().getBaseContext());
@@ -65,6 +70,7 @@ public class AddNoteFragment extends Fragment {
 
                 Note note1 = new Note(b, d, nID, title);
                 myRef.child(userId).child("portfolio").child("notes").child(nID).setValue(note1);
+                fragmentManager.popBackStack();
             }
         });
 
