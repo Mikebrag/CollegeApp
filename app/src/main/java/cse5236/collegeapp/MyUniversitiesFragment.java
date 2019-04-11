@@ -98,7 +98,7 @@ public class MyUniversitiesFragment extends Fragment {
         ActionBar actionbar = ((AppCompatActivity) getActivity()).getSupportActionBar();
         actionbar.setDisplayHomeAsUpEnabled(true);
         actionbar.setHomeAsUpIndicator(R.drawable.ic_arrow_back_black_24dp);
-        actionbar.setTitle(R.string.my_universities);
+        actionbar.setTitle(R.string.my_schools);
         mainActivity = (MainActivity) getActivity();
         mainActivity.backButtonEnabled = true;
         return v;

@@ -11,7 +11,7 @@
         android:textSize="24sp"
         android:paddingVertical="16sp"
         android:paddingLeft="8sp"
-        android:text="University"/>
+        android:text="School"/>
 
     <View
         android:layout_width="fill_parent"

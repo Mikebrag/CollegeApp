@@ -25,7 +25,7 @@
         android:layout_width="200sp"
         android:layout_height="wrap_content"
         android:layout_marginVertical="10sp"
-        android:text="@string/my_universities" />
+        android:text="@string/my_schools" />
 
     <Button
         android:id="@+id/my_notes_button"

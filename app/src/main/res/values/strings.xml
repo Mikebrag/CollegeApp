@@ -2,10 +2,10 @@
     <string name="app_name">CollegeApp</string>
     <string name="app_label">CollegeApp</string>
     <string name="title_activity_main">Main</string>
-    <string name="title_activity_maps">Map</string>
-    <string name="title_activity_account">Account</string>
-    <string name="title_activity_portfolio">Portfolio</string>
-    <string name="title_activity_college">Colleges</string>
+    <string name="title_maps">Map</string>
+    <string name="title_account">Account</string>
+    <string name="title_portfolio">Portfolio</string>
+    <string name="title_school">Schools</string>
 	<!-- Strings related to login -->
     <string name="prompt_email">Email</string>
     <string name="prompt_password">Password (optional)</string>
@@ -36,9 +36,9 @@
 
     <string name="add_to_portfolio_button">Add To Portfolio</string>
     <string name="remove_from_portfolio_button">Remove from Portfolio</string>
-    <string name="university_list_search_hint">Search Universities</string>
+    <string name="school_list_search_hint">Search Schools</string>
     <string name="my_notes">My Notes</string>
-    <string name="my_universities">My Universities</string>
+    <string name="my_schools">My Schools</string>
     <string name="my_portfolio">My Portfolio</string>
     <string name="add_note">Add Note</string>
     <string name="edit_note">Edit Note</string>
