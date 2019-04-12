@@ -1,0 +1,46 @@
+<resources>
+    <string name="app_name">CollegeApp</string>
+    <string name="app_label">CollegeApp</string>
+    <string name="title_activity_main">>El Menú</string>
+    <string name="title_maps">El Mapa</string>
+    <string name="title_account">La Cuenta</string>
+    <string name="title_portfolio">El Portafolio</string>
+    <string name="title_school">Las Escuelas</string>
+	<!-- Strings related to login -->
+    <string name="prompt_email">>El Email</string>
+    <string name="prompt_password">La Contraseña (Opcional)</string>
+    <string name="action_sign_in">Ingresas o registras</string>
+    <string name="action_sign_in_short">Te Registras</string>
+    <string name="error_invalid_email">El email no es válido</string>
+    <string name="error_invalid_password">La contraseña es demasiado corto</string>
+    <string name="error_incorrect_password">Tu contraseña es incorrecto</string>
+    <string name="error_field_required">El campo es necesario</string>
+    <string name="permission_rationale">Se requieren permisos de contactos</string>
+    <string name="user_display_name_key">user_display_name_key</string>
+    <string name="default_user_display_name_key">Default Display Name</string>
+    <string name="user_given_name_key">user_given_name_key</string>
+    <string name="default_user_given_name_key">Default Given Name</string>
+    <string name="user_family_name_key">user_family_name_key</string>
+    <string name="default_user_family_name_key">Default Family Name</string>
+    <string name="user_id_key">user_id_key</string>
+    <string name="default_user_id_key">Default ID</string>
+    <string name="user_email_key">user_email_key</string>
+    <string name="default_user_email_key">Default Email</string>
+    <string name="sign_out_button">Cerras Sesion</string>
+    <string name="delete_account_button">Borras tu cuenta</string>
+    <string name="user_profile_picture">user_profile_picture</string>
+
+    <string name="server_client_id">561304898009-neqhgfukgtvq2ivqklvmo7k323tbab9v.apps.googleusercontent.com</string>
+
+    <string name="add_to_portfolio_button">Añades a Portafolio</string>
+    <string name="remove_from_portfolio_button">Eliminas de la Portafolio</string>
+    <string name="school_list_search_hint">Buscas Escuelas</string>
+    <string name="my_notes">Mis Notas</string>
+    <string name="my_schools">Mis Escuelas</string>
+    <string name="my_portfolio">Mis Portafolios</string>
+    <string name="add_note">Añades Nota</string>
+    <string name="edit_note">Corriges una Nota</string>
+    <string name="delete_note">Eliminas una Nota</string>
+    <string name="update_note">Actualizas una Nota</string>
+    <string name="completed_app">Aplicación presentado?</string>
+</resources>
