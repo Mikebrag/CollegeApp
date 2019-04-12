@@ -1,9 +1,9 @@
 package cse5236.collegeapp;
 
-import androidx.recyclerview.widget.RecyclerView;
-
 import android.view.View;
 import android.widget.TextView;
+
+import androidx.recyclerview.widget.RecyclerView;
 
 public class UniversityListViewHolder extends RecyclerView.ViewHolder {
 
