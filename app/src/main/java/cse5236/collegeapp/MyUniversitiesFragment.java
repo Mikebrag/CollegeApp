@@ -3,7 +3,6 @@ package cse5236.collegeapp;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -22,7 +21,6 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 public class MyUniversitiesFragment extends Fragment {
-    private static final String TAG = "MyUniversitiesFragment";
 
     private MainActivity mainActivity;
     private RecyclerView recyclerView;
@@ -55,7 +53,6 @@ public class MyUniversitiesFragment extends Fragment {
                         .setQuery(query, University.class)
                         .build();
 
-        Log.d(TAG, "about to  create adapter");
         firebaseRecyclerAdapter = new FirebaseRecyclerAdapter<University, UniversityListViewHolder>(options) {
             @Override
             public UniversityListViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
@@ -91,8 +88,6 @@ public class MyUniversitiesFragment extends Fragment {
 
         // specify adapter
         recyclerView.setAdapter(firebaseRecyclerAdapter);
-
-        Log.d(TAG, "adapter set");
 
         // Change action bar nav drawer button to a back button
         ActionBar actionbar = ((AppCompatActivity) getActivity()).getSupportActionBar();

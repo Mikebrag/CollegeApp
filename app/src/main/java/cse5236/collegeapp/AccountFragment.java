@@ -5,7 +5,6 @@ import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,9 +19,7 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
 
-
 public class AccountFragment extends Fragment implements View.OnClickListener {
-    private static final String TAG = "AccountFragment";
 
     public static Uri profilePicture = null;
 
@@ -40,7 +37,6 @@ public class AccountFragment extends Fragment implements View.OnClickListener {
 
     @Override
     public void onStart() {
-        Log.d(TAG, "Entering onStart");
         super.onStart();
         SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(getActivity().getBaseContext());
         String defaultGivenName = getResources().getString(R.string.default_user_given_name_key);
@@ -64,7 +60,7 @@ public class AccountFragment extends Fragment implements View.OnClickListener {
 
     @Override
     public void onClick(View v) {
-        switch(v.getId()) {
+        switch (v.getId()) {
             case R.id.sign_out_button:
                 signOut();
                 break;
@@ -75,7 +71,7 @@ public class AccountFragment extends Fragment implements View.OnClickListener {
     }
 
     private void signOut() {
-        ((MainActivity)this.getActivity()).mGoogleSignInClient.signOut()
+        ((MainActivity) this.getActivity()).mGoogleSignInClient.signOut()
                 .addOnCompleteListener(this.getActivity(), new OnCompleteListener<Void>() {
                     @Override
                     public void onComplete(@NonNull Task<Void> task) {
@@ -86,7 +82,7 @@ public class AccountFragment extends Fragment implements View.OnClickListener {
     }
 
     private void revokeAccess() {
-        ((MainActivity)this.getActivity()).mGoogleSignInClient.revokeAccess()
+        ((MainActivity) this.getActivity()).mGoogleSignInClient.revokeAccess()
                 .addOnCompleteListener(this.getActivity(), new OnCompleteListener<Void>() {
                     @Override
                     public void onComplete(@NonNull Task<Void> task) {

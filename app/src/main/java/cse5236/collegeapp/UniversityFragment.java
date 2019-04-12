@@ -25,8 +25,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 
 public class UniversityFragment extends Fragment {
-    private static final String TAG = "UniversityFragment";
-
+    
     SharedPreferences sharedPref;
     FirebaseDatabase firebase;
     MainActivity mainActivity;

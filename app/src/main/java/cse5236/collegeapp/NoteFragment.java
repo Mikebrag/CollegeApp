@@ -23,7 +23,6 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
 public class NoteFragment extends Fragment implements View.OnClickListener {
-    private static final String TAG = "NoteFragment";
 
     SharedPreferences sharedPref;
     FirebaseDatabase firebase;
